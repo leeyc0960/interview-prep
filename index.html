@@ -4,152 +4,219 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>면접 준비 노트</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; min-height: 100vh; color: #1a1a1a; }
-.screen { display: none; padding: 2rem; }
+.screen { display: none; padding: 2rem; max-width: 680px; margin: 0 auto; }
 .screen.active { display: block; }
-.card { background: #fff; border: 0.5px solid #e0e0db; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
-.logo { font-size: 20px; font-weight: 500; margin-bottom: 0.25rem; }
-.subtitle { font-size: 13px; color: #888; margin-bottom: 1.5rem; }
+.card-select { aspect-ratio: 3/4; border-radius: 20px; padding: 2rem 1.5rem; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-end; transition: transform 0.15s; border: none; }
+.card-select:hover { transform: scale(1.02); }
+.school-btn { width: 100%; background: #fff; border: 1.5px solid #d0d0cb; border-radius: 16px; padding: 14px 18px; cursor: pointer; text-align: left; transition: border-color 0.15s, transform 0.1s; display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+.school-btn:hover { border-color: #7BC67A; transform: translateX(4px); }
+.school-btn.daib:hover { border-color: #1B2A4A; }
+.logo-box { width: 52px; height: 52px; border-radius: 10px; overflow: hidden; background: #f5f5f3; border: 0.5px solid #e0e0db; flex-shrink: 0; }
+.logo-box img { width: 100%; height: 100%; object-fit: contain; }
 .field { margin-bottom: 1rem; }
 .field label { display: block; font-size: 13px; color: #555; margin-bottom: 6px; }
 .field input, .field select, .field textarea { width: 100%; padding: 9px 12px; border: 0.5px solid #d0d0cb; border-radius: 8px; font-size: 14px; background: #fff; outline: none; font-family: inherit; }
-.field input:focus, .field select:focus, .field textarea:focus { border-color: #888; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: #555; }
 .field textarea { height: 80px; resize: vertical; }
-.btn-primary { width: 100%; padding: 10px; background: #1a1a1a; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; margin-top: 0.5rem; }
+.btn-primary { width: 100%; padding: 10px; background: #1a1a1a; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; }
 .btn-primary:hover { opacity: 0.85; }
 .btn-ghost { background: transparent; border: 0.5px solid #ccc; border-radius: 8px; padding: 8px 14px; font-size: 13px; color: #555; cursor: pointer; }
-.btn-ghost:hover { background: #f5f5f3; }
+.btn-ghost:hover { background: #efefec; }
 .btn-danger { background: transparent; border: 0.5px solid #f5c6c6; border-radius: 8px; padding: 6px 12px; font-size: 12px; color: #c0392b; cursor: pointer; }
-.btn-danger:hover { background: #fff0f0; }
 .btn-small { background: transparent; border: 0.5px solid #ccc; border-radius: 8px; padding: 5px 10px; font-size: 12px; color: #555; cursor: pointer; }
-.btn-small:hover { background: #f5f5f3; }
-.tab-bar { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.tab { padding: 8px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; border: 0.5px solid #d0d0cb; color: #555; background: transparent; }
-.tab.active { background: #1a1a1a; color: #fff; border-color: transparent; }
-.section-title { font-size: 15px; font-weight: 500; margin-bottom: 1rem; }
-.q-block { margin-bottom: 1.25rem; }
-.q-label { font-size: 13px; font-weight: 500; color: #555; margin-bottom: 6px; }
-.q-hint { font-size: 11px; color: #aaa; margin-bottom: 6px; }
-.save-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 1.5rem; padding-top: 1rem; border-top: 0.5px solid #eee; }
-.saved-tag { font-size: 12px; color: #aaa; display: flex; align-items: center; gap: 4px; }
-.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
 .badge { font-size: 11px; padding: 3px 8px; border-radius: 20px; font-weight: 500; }
 .badge-admin { background: #e8f0fe; color: #1a73e8; }
 .badge-student { background: #e6f4ea; color: #137333; }
-.student-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 1rem; background: #f9f9f7; border-radius: 8px; border: 0.5px solid #e0e0db; margin-bottom: 8px; cursor: pointer; }
-.student-row:hover { border-color: #bbb; }
-.sheet-type-tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; }
-.tag-고입 { background: #fef3e2; color: #b06000; }
-.tag-대입 { background: #f0ebfe; color: #6d28d9; }
+.q-block { background: #fff; border-radius: 16px; padding: 1.25rem 1.5rem; border: 0.5px solid #e0e0db; margin-bottom: 14px; }
+.q-num { background: #7BC67A; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-bottom: 6px; }
+.q-num.daib { background: #1B2A4A; }
+.q-label { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+.q-hint { font-size: 12px; color: #aaa; margin-bottom: 10px; }
+.save-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 1.5rem; padding-top: 1rem; border-top: 0.5px solid #eee; }
+.saved-tag { font-size: 12px; color: #aaa; }
 .error-msg { font-size: 12px; color: #c0392b; margin-top: 6px; display: none; }
 .success-msg { font-size: 12px; color: #137333; margin-top: 6px; display: none; }
 .hint-box { background: #f9f9f7; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #888; margin-bottom: 1rem; }
-.loading { text-align: center; padding: 3rem; color: #aaa; font-size: 14px; }
+.card-wrap { background: #fff; border: 0.5px solid #e0e0db; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+.student-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 1rem; background: #f9f9f7; border-radius: 8px; border: 0.5px solid #e0e0db; margin-bottom: 8px; cursor: pointer; }
+.student-row:hover { border-color: #bbb; }
+.sheet-type-tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; }
+.tag-고입 { background: #e6f4ea; color: #137333; }
+.tag-대입 { background: #e8f0fe; color: #1a73e8; }
+.gender-row { display: flex; gap: 12px; }
+.gender-opt { flex: 1; padding: 10px; border: 0.5px solid #d0d0cb; border-radius: 8px; text-align: center; font-size: 14px; cursor: pointer; background: #fff; }
+.gender-opt.selected { border-color: #1a1a1a; background: #1a1a1a; color: #fff; font-weight: 600; }
 </style>
 </head>
 <body>
 
-<div id="loading-screen" class="screen active" style="max-width:400px;margin:5rem auto;text-align:center;">
-  <div class="loading"><i class="ti ti-loader" style="font-size:32px;"></i><br/><br/>로딩 중...</div>
-</div>
-
-<div id="login-screen" class="screen" style="max-width:400px;margin:3rem auto;">
-  <div class="card">
-    <div class="logo">🎓 면접 준비 노트</div>
-    <div class="subtitle">아이디와 비밀번호를 입력해주세요</div>
-    <div class="field"><label>아이디</label><input type="text" id="login-id" placeholder="아이디 입력" /></div>
-    <div class="field"><label>비밀번호</label><input type="password" id="login-pw" placeholder="비밀번호 입력" /></div>
+<!-- 로그인 -->
+<div id="login-screen" class="screen active" style="max-width:400px;padding-top:4rem;">
+  <div style="background:#fff;border:0.5px solid #e0e0db;border-radius:12px;padding:1.5rem;">
+    <div style="font-size:20px;font-weight:700;margin-bottom:4px;">🎓 면접 준비 노트</div>
+    <div style="font-size:13px;color:#aaa;margin-bottom:1.5rem;">아이디와 비밀번호를 입력해주세요</div>
+    <div class="field"><label>아이디</label><input id="login-id" type="text" placeholder="아이디 입력" /></div>
+    <div class="field"><label>비밀번호</label><input id="login-pw" type="password" placeholder="비밀번호 입력" /></div>
     <div id="login-error" class="error-msg">아이디 또는 비밀번호가 올바르지 않습니다.</div>
     <button class="btn-primary" onclick="doLogin()">로그인</button>
-    <div style="text-align:center;margin-top:1.25rem;font-size:13px;color:#aaa;">
-      아이디·비밀번호 변경은 <strong style="color:#555">멘토님께 요청</strong>해주세요
-    </div>
+    <div style="text-align:center;margin-top:1.25rem;font-size:13px;color:#aaa;">아이디·비밀번호 변경은 <strong style="color:#555">멘토님께 요청</strong>해주세요</div>
   </div>
 </div>
 
-<div id="admin-screen" class="screen" style="max-width:680px;margin:0 auto;">
+<!-- 학생 홈 (카드 선택) -->
+<div id="student-home" class="screen">
   <div class="header">
     <div>
-      <div class="logo">면접 준비 노트</div>
+      <div style="font-size:18px;font-weight:700;">면접 준비 노트</div>
+      <div style="font-size:12px;color:#aaa;margin-top:3px;" id="student-home-tag"></div>
+    </div>
+    <button class="btn-ghost" onclick="doLogout()">로그아웃</button>
+  </div>
+  <div style="font-size:13px;color:#aaa;margin-bottom:1rem;">준비할 항목을 선택해주세요</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:480px;">
+    <button class="card-select" style="background:#7BC67A;" onclick="goSchool('고입')">
+      <div style="font-size:13px;font-weight:700;color:rgba(0,0,0,0.5);margin-bottom:6px;">고등학교</div>
+      <div style="font-size:20px;font-weight:700;color:#1a1a1a;">면접 준비</div>
+    </button>
+    <button class="card-select" style="background:#1B2A4A;" onclick="goSchool('대입')">
+      <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">대학교</div>
+      <div style="font-size:20px;font-weight:700;color:#fff;">면접 준비</div>
+    </button>
+  </div>
+</div>
+
+<!-- 학교 선택 -->
+<div id="school-select" class="screen">
+  <div class="header">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="btn-ghost" onclick="show('student-home')">← 뒤로</button>
+      <div>
+        <div style="font-size:16px;font-weight:700;" id="school-select-title"></div>
+        <div style="font-size:12px;color:#aaa;margin-top:2px;">지원할 학교를 선택해주세요</div>
+      </div>
+    </div>
+  </div>
+  <div id="school-list"></div>
+</div>
+
+<!-- 질문 시트 -->
+<div id="sheet-screen" class="screen">
+  <div class="header">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="btn-ghost" id="sheet-back-btn">← 뒤로</button>
+      <div>
+        <div style="font-size:16px;font-weight:700;" id="sheet-title"></div>
+        <div style="font-size:12px;color:#aaa;margin-top:2px;" id="sheet-subtitle"></div>
+      </div>
+    </div>
+    <button class="btn-ghost" onclick="doLogout()">로그아웃</button>
+  </div>
+  <div id="sheet-questions"></div>
+  <div class="save-bar">
+    <div class="saved-tag" id="save-status">저장됨</div>
+    <button class="btn-primary" style="width:auto;padding:10px 24px;" onclick="saveSheet()">저장</button>
+  </div>
+</div>
+
+<!-- 관리자 화면 -->
+<div id="admin-screen" class="screen">
+  <div class="header">
+    <div>
+      <div style="font-size:18px;font-weight:700;">면접 준비 노트</div>
       <div style="font-size:12px;color:#aaa;margin-top:2px;" id="admin-name-tag"></div>
     </div>
     <div style="display:flex;gap:8px;">
-      <button class="btn-ghost" onclick="showAdminTab('students')"><i class="ti ti-users"></i> 학생</button>
-      <button class="btn-ghost" onclick="showAdminTab('accounts')"><i class="ti ti-settings"></i> 계정관리</button>
-      <button class="btn-ghost" onclick="doLogout()"><i class="ti ti-logout"></i></button>
+      <button class="btn-ghost" onclick="showAdminTab('students')">학생</button>
+      <button class="btn-ghost" onclick="showAdminTab('schools')">학교관리</button>
+      <button class="btn-ghost" onclick="showAdminTab('accounts')">계정관리</button>
+      <button class="btn-ghost" onclick="doLogout()">로그아웃</button>
     </div>
   </div>
+
   <div id="tab-students">
     <div style="display:flex;gap:8px;margin-bottom:1rem;align-items:center;">
-      <div class="section-title" style="margin:0;flex:1;">전체 학생</div>
-      <select id="filter-type" style="width:auto;padding:6px 10px;border:0.5px solid #d0d0cb;border-radius:8px;font-size:13px;" onchange="renderStudentList()">
+      <div style="font-size:15px;font-weight:600;flex:1;">전체 학생</div>
+      <select id="filter-type" style="padding:6px 10px;border:0.5px solid #d0d0cb;border-radius:8px;font-size:13px;" onchange="renderStudentList()">
         <option value="전체">전체</option><option value="고입">고입</option><option value="대입">대입</option>
       </select>
     </div>
     <div id="student-list"></div>
   </div>
+
+  <div id="tab-schools" style="display:none;">
+    <div style="font-size:15px;font-weight:600;margin-bottom:1rem;">학교 관리</div>
+    <div class="card-wrap">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+        <div style="font-size:14px;font-weight:600;">고등학교 <span style="font-size:12px;color:#aaa;">(최대 3개)</span></div>
+      </div>
+      <div id="goib-schools-list"></div>
+    </div>
+    <div class="card-wrap">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+        <div style="font-size:14px;font-weight:600;">대학교</div>
+        <button class="btn-ghost" onclick="addDaibSchool()">+ 추가</button>
+      </div>
+      <div id="daib-schools-list"></div>
+    </div>
+  </div>
+
   <div id="tab-accounts" style="display:none;">
-    <div class="section-title">계정 관리</div>
-    <div class="hint-box">학생 계정 추가·수정·삭제 및 관리자 계정 정보 변경을 할 수 있어요.</div>
-    <div class="card">
-      <div style="font-size:14px;font-weight:500;margin-bottom:1rem;">관리자 계정 설정</div>
+    <div style="font-size:15px;font-weight:600;margin-bottom:1rem;">계정 관리</div>
+    <div class="card-wrap" style="margin-bottom:1rem;">
+      <div style="font-size:14px;font-weight:600;margin-bottom:1rem;">관리자 계정 설정</div>
       <div class="field"><label>아이디 변경</label><input id="new-admin-id" placeholder="새 아이디" /></div>
       <div class="field"><label>새 비밀번호</label><input type="password" id="new-admin-pw" placeholder="변경 시에만 입력" /></div>
       <div class="field"><label>비밀번호 확인</label><input type="password" id="confirm-admin-pw" placeholder="다시 입력" /></div>
       <div id="admin-pw-error" class="error-msg"></div>
-      <div id="admin-pw-success" class="success-msg">계정 정보가 변경되었습니다.</div>
+      <div id="admin-pw-success" class="success-msg">저장되었습니다.</div>
       <button class="btn-primary" style="margin-top:0.5rem;" onclick="changeAdminInfo()">변경</button>
     </div>
-    <div class="card">
+    <div class="card-wrap">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-        <div style="font-size:14px;font-weight:500;">학생 계정 목록</div>
-        <button class="btn-ghost" onclick="openAddStudent()"><i class="ti ti-plus"></i> 추가</button>
+        <div style="font-size:14px;font-weight:600;">학생 계정 목록</div>
+        <button class="btn-ghost" onclick="openAddStudent()">+ 추가</button>
       </div>
       <div id="accounts-list"></div>
     </div>
   </div>
 </div>
 
-<div id="student-screen" class="screen" style="max-width:680px;margin:0 auto;">
-  <div class="header">
-    <div>
-      <div class="logo">면접 준비 노트</div>
-      <div style="font-size:12px;color:#aaa;margin-top:2px;" id="student-user-tag"></div>
-    </div>
-    <button class="btn-ghost" onclick="doLogout()"><i class="ti ti-logout"></i></button>
-  </div>
-  <div class="tab-bar">
-    <button class="tab active" onclick="switchStudentTab('고입',this)">고입 면접</button>
-    <button class="tab" onclick="switchStudentTab('대입',this)">대입 면접</button>
-  </div>
-  <div id="sheet-content"></div>
-</div>
-
-<div id="admin-detail-screen" class="screen" style="max-width:680px;margin:0 auto;">
+<!-- 관리자 학생 상세 -->
+<div id="admin-detail" class="screen">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;">
-    <button class="btn-ghost" onclick="backToAdmin()"><i class="ti ti-arrow-left"></i></button>
+    <button class="btn-ghost" onclick="backToAdmin()">← 뒤로</button>
     <div>
-      <div class="logo" id="detail-name"></div>
+      <div style="font-size:16px;font-weight:700;" id="detail-name"></div>
       <div style="font-size:12px;color:#aaa;margin-top:2px;" id="detail-meta"></div>
     </div>
   </div>
-  <div class="tab-bar">
-    <button class="tab active" onclick="switchDetailTab('고입',this)">고입 면접</button>
-    <button class="tab" onclick="switchDetailTab('대입',this)">대입 면접</button>
-  </div>
-  <div id="detail-sheet-content"></div>
+  <div id="detail-school-list"></div>
 </div>
 
+<!-- 관리자 학생 시트 상세 -->
+<div id="admin-sheet-detail" class="screen">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;">
+    <button class="btn-ghost" id="admin-sheet-back">← 뒤로</button>
+    <div>
+      <div style="font-size:16px;font-weight:700;" id="admin-sheet-title"></div>
+      <div style="font-size:12px;color:#aaa;margin-top:2px;" id="admin-sheet-sub"></div>
+    </div>
+  </div>
+  <div id="admin-sheet-questions"></div>
+</div>
+
+<!-- 모달 -->
 <div id="modal-bg" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.4);z-index:10;display:none;align-items:center;justify-content:center;">
   <div style="background:#fff;border-radius:12px;padding:1.5rem;width:320px;border:0.5px solid #e0e0db;max-height:90vh;overflow-y:auto;" id="modal-box"></div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, collection, getDocs, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, collection, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCqWN3aPnUqd2UdJgjZxzq7NBHE0rbs8eI",
@@ -163,6 +230,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+const BASE_URL = 'https://leeyc0960.github.io/interview-prep/';
+
+const DEFAULT_GOIB_SCHOOLS = [
+  { id: 'han', name: '한국조리과학고등학교', img: 'han.jpg', sub: '조리 · 제과제빵 · 외식' },
+  { id: 'gom', name: '고명외식고등학교', img: 'gom.jpg', sub: '조리 · 제과제빵 · 바리스타' },
+  { id: 'glo', name: '한국글로벌셰프고등학교', img: 'glo.jpg', sub: '남자고등학교', tag: '남고' },
+];
+
 const GOIB_QUESTIONS = [
   { id: 'g1', label: '지원 동기', hint: '왜 이 고등학교에 지원했나요?' },
   { id: 'g2', label: '학교생활 중 가장 기억에 남는 경험', hint: '구체적인 사례와 배운 점을 적어보세요' },
@@ -170,6 +245,7 @@ const GOIB_QUESTIONS = [
   { id: 'g4', label: '본인의 장점과 단점', hint: '단점은 극복 노력과 함께 적기' },
   { id: 'g5', label: '마지막으로 하고 싶은 말', hint: '입학 후 하고 싶은 것, 기여하고 싶은 것' },
 ];
+
 const DAIB_QUESTIONS = [
   { id: 'd1', label: '지원 학과 선택 이유', hint: '전공에 대한 관심과 탐구 경험을 적어보세요' },
   { id: 'd2', label: '학업 역량 및 성취 경험', hint: '교과 활동, 탐구, 독서 등 구체적 사례' },
@@ -180,27 +256,45 @@ const DAIB_QUESTIONS = [
 ];
 
 let currentUser = null;
+let currentType = null;
+let currentSchool = null;
 let currentStudentId = null;
 let adminData = null;
+let goibSchools = [...DEFAULT_GOIB_SCHOOLS];
+let daibSchools = [];
 
-function show(id) {
+window.show = (id) => {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-}
+};
 
-function showModal(html) {
+window.showModal = (html) => {
   document.getElementById('modal-box').innerHTML = html;
   document.getElementById('modal-bg').style.display = 'flex';
-}
+};
 window.closeModal = () => { document.getElementById('modal-bg').style.display = 'none'; };
 
 async function loadAdmin() {
   const snap = await getDoc(doc(db, 'config', 'admin'));
   if (!snap.exists()) {
-    await setDoc(doc(db, 'config', 'admin'), { id: 'leeyc0960', pw: '1234', name: '멘토' });
-    return { id: 'leeyc0960', pw: '1234', name: '멘토' };
+    const d = { id: 'leeyc0960', pw: '1234', name: '멘토' };
+    await setDoc(doc(db, 'config', 'admin'), d);
+    return d;
   }
   return snap.data();
+}
+
+async function loadSchools() {
+  const snap = await getDoc(doc(db, 'config', 'schools'));
+  if (snap.exists()) {
+    const d = snap.data();
+    if (d.goib) goibSchools = d.goib;
+    if (d.daib) daibSchools = d.daib;
+  }
+}
+
+async function saveSchools() {
+  await setDoc(doc(db, 'config', 'schools'), { goib: goibSchools, daib: daibSchools });
 }
 
 window.doLogin = async () => {
@@ -209,6 +303,7 @@ window.doLogin = async () => {
   const err = document.getElementById('login-error');
   err.style.display = 'none';
   adminData = await loadAdmin();
+  await loadSchools();
   if (id === adminData.id && pw === adminData.pw) {
     currentUser = { ...adminData, role: 'admin' };
     document.getElementById('admin-name-tag').innerHTML = adminData.name + ' · <span class="badge badge-admin">관리자</span>';
@@ -220,9 +315,8 @@ window.doLogin = async () => {
   const snap = await getDoc(doc(db, 'students', id));
   if (snap.exists() && snap.data().pw === pw) {
     currentUser = { id, ...snap.data(), role: 'student' };
-    document.getElementById('student-user-tag').innerHTML = currentUser.name + ' · <span class="badge badge-student">학생</span>';
-    await renderSheet('고입');
-    show('student-screen');
+    document.getElementById('student-home-tag').innerHTML = currentUser.name + ' · <span class="badge badge-student">학생</span>';
+    show('student-home');
     return;
   }
   err.style.display = 'block';
@@ -235,10 +329,69 @@ window.doLogout = () => {
   show('login-screen');
 };
 
+window.goSchool = (type) => {
+  currentType = type;
+  document.getElementById('school-select-title').textContent = type === '고입' ? '고등학교 면접 준비' : '대학교 면접 준비';
+  const list = document.getElementById('school-list');
+  const schools = type === '고입' ? goibSchools : daibSchools;
+  let html = '';
+  schools.forEach(s => {
+    html += `<button class="school-btn ${type === '대입' ? 'daib' : ''}" onclick="goSheet('${s.id}','${s.name}')">
+      <div class="logo-box"><img src="${BASE_URL}${s.img}" alt="${s.name}" onerror="this.style.display='none'" /></div>
+      <div>
+        <div style="font-size:15px;font-weight:700;color:#1a1a1a;">${s.name}</div>
+        ${s.sub ? `<div style="font-size:12px;color:#aaa;margin-top:3px;">${s.sub}</div>` : ''}
+        ${s.tag === '남고' ? `<div style="font-size:11px;color:#1B2A4A;font-weight:600;margin-top:2px;">남자고등학교</div>` : ''}
+      </div>
+    </button>`;
+  });
+  if (!schools.length) html = '<div style="color:#aaa;font-size:14px;text-align:center;padding:2rem;">등록된 학교가 없습니다.</div>';
+  list.innerHTML = html;
+  show('school-select');
+};
+
+window.goSheet = async (schoolId, schoolName) => {
+  currentSchool = { id: schoolId, name: schoolName };
+  const qs = currentType === '고입' ? GOIB_QUESTIONS : DAIB_QUESTIONS;
+  const sheetKey = `${currentType}_${schoolId}`;
+  const snap = await getDoc(doc(db, 'sheets', currentUser.id));
+  const data = snap.exists() ? (snap.data()[sheetKey] || {}) : {};
+  document.getElementById('sheet-title').textContent = schoolName;
+  document.getElementById('sheet-subtitle').textContent = currentType === '고입' ? '고등학교 면접 준비' : '대학교 면접 준비';
+  document.getElementById('sheet-back-btn').onclick = () => goSchool(currentType);
+  const color = currentType === '고입' ? '#7BC67A' : '#1B2A4A';
+  let html = '';
+  qs.forEach((q, i) => {
+    html += `<div class="q-block">
+      <span class="q-num ${currentType === '대입' ? 'daib' : ''}">Q${i+1}</span>
+      <div class="q-label">${q.label}</div>
+      <div class="q-hint">${q.hint}</div>
+      <textarea id="q-${q.id}" placeholder="여기에 생각을 자유롭게 적어보세요...">${data[q.id] || ''}</textarea>
+    </div>`;
+  });
+  document.getElementById('sheet-questions').innerHTML = html;
+  show('sheet-screen');
+};
+
+window.saveSheet = async () => {
+  const qs = currentType === '고입' ? GOIB_QUESTIONS : DAIB_QUESTIONS;
+  const sheetKey = `${currentType}_${currentSchool.id}`;
+  const data = {};
+  qs.forEach(q => { data[q.id] = document.getElementById('q-'+q.id).value; });
+  const el = document.getElementById('save-status');
+  el.textContent = '저장 중...';
+  const snap = await getDoc(doc(db, 'sheets', currentUser.id));
+  const existing = snap.exists() ? snap.data() : {};
+  await setDoc(doc(db, 'sheets', currentUser.id), { ...existing, [sheetKey]: data });
+  el.textContent = '저장완료 ✓';
+};
+
 window.showAdminTab = (tab) => {
-  document.getElementById('tab-students').style.display = tab === 'students' ? 'block' : 'none';
-  document.getElementById('tab-accounts').style.display = tab === 'accounts' ? 'block' : 'none';
+  ['students','schools','accounts'].forEach(t => {
+    document.getElementById('tab-'+t).style.display = t === tab ? 'block' : 'none';
+  });
   if (tab === 'accounts') { document.getElementById('new-admin-id').value = adminData.id; renderAccountsList(); }
+  if (tab === 'schools') renderSchoolsAdmin();
 };
 
 async function renderStudentList() {
@@ -249,30 +402,143 @@ async function renderStudentList() {
     const s = d.data();
     if (filter !== '전체' && s.sheetType !== filter) return;
     html += `<div class="student-row" onclick="openStudentDetail('${d.id}')">
-      <div><div style="font-size:14px;font-weight:500;">${s.name}</div><div style="font-size:12px;color:#aaa;">${s.phone}</div></div>
-      <div style="display:flex;align-items:center;gap:8px;"><span class="sheet-type-tag tag-${s.sheetType}">${s.sheetType}</span><i class="ti ti-chevron-right" style="color:#ccc;"></i></div>
+      <div>
+        <div style="font-size:14px;font-weight:600;">${s.name} <span style="font-size:12px;color:#aaa;">${s.gender || ''}</span></div>
+        <div style="font-size:12px;color:#aaa;">${s.phone}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="sheet-type-tag tag-${s.sheetType}">${s.sheetType}</span>
+        <span style="color:#ccc;">›</span>
+      </div>
     </div>`;
   });
   document.getElementById('student-list').innerHTML = html || '<div style="color:#aaa;font-size:14px;text-align:center;padding:2rem;">등록된 학생이 없습니다.</div>';
 }
 window.renderStudentList = renderStudentList;
 
-async function renderAccountsList() {
-  const snap = await getDocs(collection(db, 'students'));
-  let html = '';
-  snap.forEach(d => {
-    const s = d.data();
-    html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:0.5px solid #eee;">
-      <div><div style="font-size:14px;font-weight:500;">${s.name} <span style="font-size:11px;color:#aaa;">(${d.id})</span></div>
-      <div style="font-size:12px;color:#aaa;">${s.phone} · <span class="sheet-type-tag tag-${s.sheetType}">${s.sheetType}</span></div></div>
-      <div style="display:flex;gap:6px;">
-        <button class="btn-small" onclick="openEditStudent('${d.id}')"><i class="ti ti-edit"></i> 수정</button>
-        <button class="btn-danger" onclick="deleteStudent('${d.id}')"><i class="ti ti-trash"></i></button>
+function renderSchoolsAdmin() {
+  let goibHtml = '';
+  goibSchools.forEach((s, i) => {
+    goibHtml += `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:0.5px solid #eee;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="logo-box"><img src="${BASE_URL}${s.img}" alt="${s.name}" style="width:100%;height:100%;object-fit:contain;" /></div>
+        <div style="font-size:14px;font-weight:600;">${s.name}</div>
       </div>
+      <button class="btn-small" onclick="editGoibSchool(${i})">수정</button>
     </div>`;
   });
-  document.getElementById('accounts-list').innerHTML = html || '<div style="color:#aaa;font-size:13px;text-align:center;padding:1rem;">등록된 학생이 없습니다.</div>';
+  document.getElementById('goib-schools-list').innerHTML = goibHtml;
+
+  let daibHtml = '';
+  daibSchools.forEach((s, i) => {
+    daibHtml += `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:0.5px solid #eee;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="logo-box"><img src="${BASE_URL}${s.img}" alt="${s.name}" style="width:100%;height:100%;object-fit:contain;" /></div>
+        <div style="font-size:14px;font-weight:600;">${s.name}</div>
+      </div>
+      <button class="btn-danger" onclick="deleteDaibSchool(${i})">삭제</button>
+    </div>`;
+  });
+  daibHtml += daibSchools.length === 0 ? '<div style="color:#aaa;font-size:13px;padding:1rem 0;">등록된 대학교가 없습니다.</div>' : '';
+  document.getElementById('daib-schools-list').innerHTML = daibHtml;
 }
+
+window.editGoibSchool = (i) => {
+  const s = goibSchools[i];
+  showModal(`
+    <div style="font-size:15px;font-weight:600;margin-bottom:1rem;">고등학교 수정</div>
+    <div class="field"><label>학교명</label><input id="m-name" value="${s.name}" /></div>
+    <div class="field"><label>설명</label><input id="m-sub" value="${s.sub || ''}" /></div>
+    <div class="field"><label>이미지 파일명 (예: gom.jpg)</label><input id="m-img" value="${s.img}" /></div>
+    <button class="btn-primary" onclick="saveGoibSchool(${i})">저장</button>
+    <button class="btn-ghost" style="width:100%;margin-top:8px;" onclick="closeModal()">취소</button>
+  `);
+};
+
+window.saveGoibSchool = async (i) => {
+  goibSchools[i].name = document.getElementById('m-name').value;
+  goibSchools[i].sub = document.getElementById('m-sub').value;
+  goibSchools[i].img = document.getElementById('m-img').value;
+  await saveSchools();
+  closeModal();
+  renderSchoolsAdmin();
+};
+
+window.addDaibSchool = () => {
+  showModal(`
+    <div style="font-size:15px;font-weight:600;margin-bottom:1rem;">대학교 추가</div>
+    <div class="field"><label>학교명</label><input id="m-name" placeholder="대학교 이름" /></div>
+    <div class="field"><label>설명 (선택)</label><input id="m-sub" placeholder="학과, 특징 등" /></div>
+    <div class="field"><label>이미지 파일명 (예: univ1.jpg)</label><input id="m-img" placeholder="파일명.jpg" /></div>
+    <button class="btn-primary" onclick="saveDaibSchool()">추가</button>
+    <button class="btn-ghost" style="width:100%;margin-top:8px;" onclick="closeModal()">취소</button>
+  `);
+};
+
+window.saveDaibSchool = async () => {
+  const name = document.getElementById('m-name').value.trim();
+  const sub = document.getElementById('m-sub').value.trim();
+  const img = document.getElementById('m-img').value.trim();
+  if (!name) return;
+  const id = 'daib_' + Date.now();
+  daibSchools.push({ id, name, sub, img });
+  await saveSchools();
+  closeModal();
+  renderSchoolsAdmin();
+};
+
+window.deleteDaibSchool = async (i) => {
+  daibSchools.splice(i, 1);
+  await saveSchools();
+  renderSchoolsAdmin();
+};
+
+window.openStudentDetail = async (id) => {
+  currentStudentId = id;
+  const snap = await getDoc(doc(db, 'students', id));
+  const s = snap.data();
+  document.getElementById('detail-name').textContent = s.name + ' 학생';
+  document.getElementById('detail-meta').innerHTML = `${s.phone} · ${s.gender || ''} · <span class="sheet-type-tag tag-${s.sheetType}">${s.sheetType}</span>`;
+  const sheetSnap = await getDoc(doc(db, 'sheets', id));
+  const sheetData = sheetSnap.exists() ? sheetSnap.data() : {};
+  const schools = s.sheetType === '고입' ? goibSchools : daibSchools;
+  let html = '';
+  schools.forEach(sc => {
+    const key = `${s.sheetType}_${sc.id}`;
+    const filled = sheetData[key] ? Object.values(sheetData[key]).filter(v=>v).length : 0;
+    html += `<div class="student-row" onclick="openAdminSheet('${sc.id}','${sc.name}','${s.sheetType}')">
+      <div>
+        <div style="font-size:14px;font-weight:600;">${sc.name}</div>
+        <div style="font-size:12px;color:#aaa;">작성 ${filled}항목</div>
+      </div>
+      <span style="color:#ccc;">›</span>
+    </div>`;
+  });
+  document.getElementById('detail-school-list').innerHTML = html || '<div style="color:#aaa;font-size:14px;padding:1rem;">작성된 시트가 없습니다.</div>';
+  show('admin-detail');
+};
+
+window.openAdminSheet = async (schoolId, schoolName, type) => {
+  const qs = type === '고입' ? GOIB_QUESTIONS : DAIB_QUESTIONS;
+  const sheetKey = `${type}_${schoolId}`;
+  const snap = await getDoc(doc(db, 'sheets', currentStudentId));
+  const data = snap.exists() ? (snap.data()[sheetKey] || {}) : {};
+  document.getElementById('admin-sheet-title').textContent = schoolName;
+  document.getElementById('admin-sheet-sub').textContent = type === '고입' ? '고등학교 면접 준비' : '대학교 면접 준비';
+  document.getElementById('admin-sheet-back').onclick = () => openStudentDetail(currentStudentId);
+  let html = '';
+  qs.forEach((q, i) => {
+    html += `<div class="q-block">
+      <span class="q-num ${type === '대입' ? 'daib' : ''}">Q${i+1}</span>
+      <div class="q-label">${q.label}</div>
+      <div style="font-size:14px;color:${data[q.id]?'#1a1a1a':'#aaa'};padding:10px 12px;background:#f9f9f7;border-radius:8px;border:0.5px solid #e0e0db;min-height:48px;">${data[q.id] || '아직 작성하지 않았습니다.'}</div>
+    </div>`;
+  });
+  document.getElementById('admin-sheet-questions').innerHTML = html;
+  show('admin-sheet-detail');
+};
+
+window.backToAdmin = () => { show('admin-screen'); };
 
 window.changeAdminInfo = async () => {
   const newId = document.getElementById('new-admin-id').value.trim();
@@ -289,11 +555,36 @@ window.changeAdminInfo = async () => {
   suc.style.display = 'block';
 };
 
+async function renderAccountsList() {
+  const snap = await getDocs(collection(db, 'students'));
+  let html = '';
+  snap.forEach(d => {
+    const s = d.data();
+    html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:0.5px solid #eee;">
+      <div>
+        <div style="font-size:14px;font-weight:600;">${s.name} <span style="font-size:11px;color:#aaa;">(${d.id})</span> ${s.gender ? `<span style="font-size:11px;color:#aaa;">${s.gender}</span>` : ''}</div>
+        <div style="font-size:12px;color:#aaa;">${s.phone} · <span class="sheet-type-tag tag-${s.sheetType}">${s.sheetType}</span></div>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <button class="btn-small" onclick="openEditStudent('${d.id}')">수정</button>
+        <button class="btn-danger" onclick="deleteStudent('${d.id}')">삭제</button>
+      </div>
+    </div>`;
+  });
+  document.getElementById('accounts-list').innerHTML = html || '<div style="color:#aaa;font-size:13px;text-align:center;padding:1rem;">등록된 학생이 없습니다.</div>';
+}
+
 window.openAddStudent = () => {
   showModal(`
-    <div style="font-size:15px;font-weight:500;margin-bottom:1rem;">학생 계정 추가</div>
+    <div style="font-size:15px;font-weight:600;margin-bottom:1rem;">학생 계정 추가</div>
     <div class="field"><label>이름</label><input id="m-name" placeholder="이름" /></div>
     <div class="field"><label>전화번호</label><input id="m-phone" placeholder="010-0000-0000" /></div>
+    <div class="field"><label>성별</label>
+      <div class="gender-row">
+        <div class="gender-opt" id="g-male" onclick="selectGender('남')">남</div>
+        <div class="gender-opt" id="g-female" onclick="selectGender('여')">여</div>
+      </div>
+    </div>
     <div class="field"><label>아이디</label><input id="m-id" placeholder="영문+숫자" /></div>
     <div class="field"><label>비밀번호</label><input type="password" id="m-pw" placeholder="비밀번호" /></div>
     <div class="field"><label>면접 유형</label><select id="m-type"><option value="고입">고입</option><option value="대입">대입</option></select></div>
@@ -301,6 +592,13 @@ window.openAddStudent = () => {
     <button class="btn-primary" onclick="submitAddStudent()">추가</button>
     <button class="btn-ghost" style="width:100%;margin-top:8px;" onclick="closeModal()">취소</button>
   `);
+};
+
+let selectedGender = '';
+window.selectGender = (g) => {
+  selectedGender = g;
+  document.getElementById('g-male').classList.toggle('selected', g === '남');
+  document.getElementById('g-female').classList.toggle('selected', g === '여');
 };
 
 window.submitAddStudent = async () => {
@@ -313,19 +611,25 @@ window.submitAddStudent = async () => {
   if (!name || !phone || !id || !pw) { err.textContent = '모든 항목을 입력해주세요.'; err.style.display = 'block'; return; }
   const existing = await getDoc(doc(db, 'students', id));
   if (existing.exists() || id === adminData.id) { err.textContent = '이미 사용 중인 아이디입니다.'; err.style.display = 'block'; return; }
-  await setDoc(doc(db, 'students', id), { name, phone, pw, sheetType: type });
-  closeModal();
-  renderAccountsList();
-  renderStudentList();
+  await setDoc(doc(db, 'students', id), { name, phone, gender: selectedGender, pw, sheetType: type });
+  selectedGender = '';
+  closeModal(); renderAccountsList(); renderStudentList();
 };
 
 window.openEditStudent = async (sid) => {
   const snap = await getDoc(doc(db, 'students', sid));
   const s = snap.data();
+  selectedGender = s.gender || '';
   showModal(`
-    <div style="font-size:15px;font-weight:500;margin-bottom:1rem;">${s.name} 계정 수정</div>
+    <div style="font-size:15px;font-weight:600;margin-bottom:1rem;">${s.name} 계정 수정</div>
     <div class="field"><label>이름</label><input id="m-name" value="${s.name}" /></div>
     <div class="field"><label>전화번호</label><input id="m-phone" value="${s.phone}" /></div>
+    <div class="field"><label>성별</label>
+      <div class="gender-row">
+        <div class="gender-opt ${s.gender==='남'?'selected':''}" id="g-male" onclick="selectGender('남')">남</div>
+        <div class="gender-opt ${s.gender==='여'?'selected':''}" id="g-female" onclick="selectGender('여')">여</div>
+      </div>
+    </div>
     <div class="field"><label>새 비밀번호 <span style="font-size:11px;color:#aaa">(변경 시에만)</span></label><input type="password" id="m-pw" placeholder="비워두면 유지" /></div>
     <div class="field"><label>면접 유형</label><select id="m-type"><option value="고입" ${s.sheetType==='고입'?'selected':''}>고입</option><option value="대입" ${s.sheetType==='대입'?'selected':''}>대입</option></select></div>
     <div id="m-error" class="error-msg"></div>
@@ -341,14 +645,15 @@ window.submitEditStudent = async (sid, oldPw) => {
   const type = document.getElementById('m-type').value;
   const err = document.getElementById('m-error');
   if (!name || !phone) { err.textContent = '이름과 전화번호를 입력해주세요.'; err.style.display = 'block'; return; }
-  await setDoc(doc(db, 'students', sid), { name, phone, pw, sheetType: type });
+  await setDoc(doc(db, 'students', sid), { name, phone, gender: selectedGender, pw, sheetType: type });
+  selectedGender = '';
   closeModal(); renderAccountsList(); renderStudentList();
 };
 
 window.deleteStudent = (sid) => {
   showModal(`
-    <div style="font-size:15px;font-weight:500;margin-bottom:0.5rem;">계정 삭제</div>
-    <div style="font-size:13px;color:#555;margin-bottom:1.5rem;">이 학생의 계정과 모든 시트 데이터가 삭제됩니다.</div>
+    <div style="font-size:15px;font-weight:600;margin-bottom:0.5rem;">계정 삭제</div>
+    <div style="font-size:13px;color:#555;margin-bottom:1.5rem;">이 학생의 계정과 모든 데이터가 삭제됩니다.</div>
     <button class="btn-primary" style="background:#c0392b;margin-bottom:8px;" onclick="confirmDelete('${sid}')">삭제</button>
     <button class="btn-ghost" style="width:100%;" onclick="closeModal()">취소</button>
   `);
@@ -360,84 +665,8 @@ window.confirmDelete = async (sid) => {
   closeModal(); renderAccountsList(); renderStudentList();
 };
 
-async function renderSheet(type) {
-  const qs = type === '고입' ? GOIB_QUESTIONS : DAIB_QUESTIONS;
-  const snap = await getDoc(doc(db, 'sheets', currentUser.id));
-  const data = snap.exists() ? (snap.data()[type] || {}) : {};
-  let html = '<div class="card">';
-  html += `<div class="section-title">${type} 면접 준비 시트</div>`;
-  qs.forEach(q => {
-    html += `<div class="q-block">
-      <div class="q-label">${q.label}</div>
-      <div class="q-hint">${q.hint}</div>
-      <textarea id="q-${q.id}" placeholder="여기에 생각을 자유롭게 적어보세요...">${data[q.id] || ''}</textarea>
-    </div>`;
-  });
-  html += `<div class="save-bar">
-    <div class="saved-tag" id="save-status"><i class="ti ti-circle-check"></i> 저장됨</div>
-    <button class="btn-ghost" onclick="saveSheet('${type}')"><i class="ti ti-device-floppy"></i> 저장</button>
-  </div></div>`;
-  document.getElementById('sheet-content').innerHTML = html;
-}
-
-window.saveSheet = async (type) => {
-  const qs = type === '고입' ? GOIB_QUESTIONS : DAIB_QUESTIONS;
-  const data = {};
-  qs.forEach(q => { data[q.id] = document.getElementById('q-'+q.id).value; });
-  const el = document.getElementById('save-status');
-  el.innerHTML = '<i class="ti ti-refresh"></i> 저장 중...';
-  const snap = await getDoc(doc(db, 'sheets', currentUser.id));
-  const existing = snap.exists() ? snap.data() : {};
-  await setDoc(doc(db, 'sheets', currentUser.id), { ...existing, [type]: data });
-  el.innerHTML = '<i class="ti ti-circle-check"></i> 저장완료';
-};
-
-window.switchStudentTab = async (type, el) => {
-  document.querySelectorAll('#student-screen .tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  await renderSheet(type);
-};
-
-window.openStudentDetail = async (id) => {
-  currentStudentId = id;
-  const snap = await getDoc(doc(db, 'students', id));
-  const s = snap.data();
-  document.getElementById('detail-name').textContent = s.name + ' 학생';
-  document.getElementById('detail-meta').innerHTML = `<span class="badge tag-${s.sheetType}">${s.sheetType}</span> · ${s.phone}`;
-  document.querySelectorAll('#admin-detail-screen .tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('#admin-detail-screen .tab')[s.sheetType === '고입' ? 0 : 1].classList.add('active');
-  await renderDetailSheet(s.sheetType);
-  show('admin-detail-screen');
-};
-
-async function renderDetailSheet(type) {
-  const qs = type === '고입' ? GOIB_QUESTIONS : DAIB_QUESTIONS;
-  const snap = await getDoc(doc(db, 'sheets', currentStudentId));
-  const data = snap.exists() ? (snap.data()[type] || {}) : {};
-  let html = '<div class="card">';
-  qs.forEach(q => {
-    html += `<div class="q-block">
-      <div class="q-label">${q.label}</div>
-      <div style="font-size:14px;color:${data[q.id]?'#1a1a1a':'#aaa'};padding:10px 12px;background:#f9f9f7;border-radius:8px;border:0.5px solid #e0e0db;min-height:48px;">${data[q.id] || '아직 작성하지 않았습니다.'}</div>
-    </div>`;
-  });
-  html += '</div>';
-  document.getElementById('detail-sheet-content').innerHTML = html;
-}
-
-window.switchDetailTab = async (type, el) => {
-  document.querySelectorAll('#admin-detail-screen .tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  await renderDetailSheet(type);
-};
-
-window.backToAdmin = async () => {
-  await renderStudentList();
-  show('admin-screen');
-};
-
-document.getElementById('login-id').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('login-pw').focus(); });
-document.getElementById('login-pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+document.getElementById('login-id').addEventListener('keydown', e => { if (e.key==='Enter') document.getElementById('login-pw').focus(); });
+document.getElementById('login-pw').addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });
 
 show('login-screen');
 </script>
